@@ -6,5 +6,3 @@
 
 <h2>[ENGLISH]</h2>
 <p>System to store logins for websites similar to Bugmenot with one big difference ... Spanish Version</p>
-
-<h2>MORE INFORMATION</h2>
