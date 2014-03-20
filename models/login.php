@@ -19,7 +19,7 @@ class login{
 	/**
 	 * Instance the connection class.
 	 */
-	public function _construct(){
+	public function __construct(){
 		$this->db = new db();
 	}
 
@@ -70,7 +70,7 @@ class login{
 		$positive = $this->db->sanitize_var($positive);
 		$negative = $this->db->sanitize_var($negative);
 
-		return $this->db->query("INSERT INTO login (domain_id, login_username, login_password, login_comment, login_date, votes_positive, votes_negative) VALUES ($domain, '$user', '$pass', '$comment', $date, $positive, $negative)");
+		return $this->db->query("INSERT INTO login (domain_id, login_username, login_password, login_comment, login_date, votes_positive, votes_negative) VALUES ($domain, '$user', '$pass', '$comment', '$date', $positive, $negative)");
 	}
 
 	/**
