@@ -35,4 +35,26 @@ class Vote{
 		
 		return $this->db->query("INSERT INTO vote (login_id, vote_value, vote_ip, vote_date) VALUES ($login, $value, '$ip', '$date')");
 	}
+
+	/**
+	 * Count total positive votes of a specific login
+	 * @param int $login ID of the login at login table
+	 * @return int
+	 */
+	public function totalPositive($login){
+		$query = $this->db->query("SELECT * FROM vote WHERE login_id = $login AND vote_value = 1");
+		
+		return $query->num_rows;
+	}
+
+	/**
+	 * Count total negative votes of a specific login
+	 * @param int $login ID of the login at login table
+	 * @return int
+	 */
+	public function totalNegative($login){
+		$query = $this->db->query("SELECT * FROM vote WHERE login_id = $login AND vote_value = 0");
+		
+		return $query->num_rows;
+	}
 }
