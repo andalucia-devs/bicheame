@@ -13,7 +13,7 @@ require_once("../config/db.php");
 * This class implements methods to manage the login table
 */
 
-class login{
+class Login{
 	private $db;
 
 	/**
@@ -61,16 +61,12 @@ class login{
 	 * @param string $pass Password
 	 * @param string $comment Optional comment about this login
 	 * @param datetime $date Date of insertion 
-	 * @param int $positive Total of positive votes
-	 * @param int $negative Total of negative votes
 	 * @return boolean
 	 */
-	public function insert($domain, $user, $pass, $comment, $date, $positive, $negative){
+	public function insert($domain, $user, $pass, $comment, $date){
 		$domain = $this->db->sanitize_var($domain);
-		$positive = $this->db->sanitize_var($positive);
-		$negative = $this->db->sanitize_var($negative);
-
-		return $this->db->query("INSERT INTO login (domain_id, login_username, login_password, login_comment, login_date, votes_positive, votes_negative) VALUES ($domain, '$user', '$pass', '$comment', '$date', $positive, $negative)");
+		
+		return $this->db->query("INSERT INTO login (domain_id, login_username, login_password, login_comment, login_date) VALUES ($domain, '$user', '$pass', '$comment', '$date')");
 	}
 
 	/**
