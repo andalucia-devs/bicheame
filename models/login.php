@@ -9,6 +9,7 @@
  */
 
 require_once("../config/db.php");
+require_once("vote.php");
 /**
 * This class implements methods to manage the login table
 */
@@ -78,5 +79,18 @@ class Login{
 		$id = $this->db->sanitize_var($id);
 
 		return $this->db->query("DELETE FROM login WHERE login_id = $id");
+	}
+
+	/**
+	* Update both positive and negative votes of a login
+	* @param int $id The ID of the specific login in the table
+	* @return boolean
+	*/
+	public function updateVotes($id){
+		$vote = new Vote();
+		$pos = $vote->totalPositive($id);
+		$neg = $vote->totalNegative($id);
+		
+		return $this->db->query("UPDATE login SET votes_positive = $pos, votes_negative = $neg WHERE login_id = $id");
 	}
 }
