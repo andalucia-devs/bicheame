@@ -12,19 +12,31 @@ require_once("../models/login.php");
 require_once("../models/domain.php");
 
 $login = new Login();
+$domain = new Domain();
+
 $request = (isset($_GET["page"]) ? $_GET["page"] : "");
 $action = (isset($_GET["action"]) ? $_GET["action"] : "");
 
 switch ($request) {
 	case 'login':
 		if($action=="insert") {
-
-			// Insertar un nuevo login
+			// Insert new login
 			if(isset($_POST['domain_name']) && isset($_POST['login_username']) && isset($_POST['login_password'])){
-				//Comprobar si el dominio existe ya en la tabla domain
-				//Si no existe lo metemos en la tabla domain y guardamos el ID
-				//Introducir en la tabla login el ID del dominio y los demás datos
-				//Redireccionar a la vista
+				$domain_name = $_POST['domain_name']);
+				$login_username = $_POST['login_username'];
+				$login_password = $_POST['login_password'];
+				$login_comment = (isset($_POST["login_comment"]) ? $_POST["login_comment"] : "");
+				$current_date = date("Y-m-d H:i:s");
+
+				if(count($domain->fetchByName($domain_name)) == 0 ){ //new domain
+					$domain->insert($domain_name, $current_date);
+				}
+				$dom = $domain->fetchByName($domain_name);
+				$domain_id = $dom["domain_id"];
+
+				$login->insert($domain_id, $login_username, $login_password, $login_comment, $current_date);
+
+				header("Location: ../index.php"); //Redirect
 			}
 
 		} elseif ($action=="view") {

@@ -41,7 +41,8 @@ class Domain{
 	public function fetchById($id){
 		$id = $this->db->sanitize_var($id);
 		
-		return $this->db->doQuery("SELECT * FROM domain WHERE domain_id = $id");
+		$result = $this->db->doQuery("SELECT * FROM domain WHERE domain_id = $id");
+		return $result[0];
 	}
 
 	/**
@@ -50,7 +51,8 @@ class Domain{
 	 * @return array
 	 */
 	public function fetchByName($name){
-		return $this->db->doQuery("SELECT * FROM domain WHERE domain_name = '$name'");
+		$result = $this->db->doQuery("SELECT * FROM domain WHERE domain_name = '$name'");
+		return $result[0];
 	}
 
 	/**
