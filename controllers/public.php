@@ -13,6 +13,7 @@ require_once("../models/domain.php");
 
 $login = new Login();
 $domain = new Domain();
+$vote  = new Vote();
 
 $request = (isset($_GET["page"]) ? $_GET["page"] : "");
 $action = (isset($_GET["action"]) ? $_GET["action"] : "");
@@ -51,12 +52,12 @@ switch ($request) {
 	case 'vote':
 		if($action=="insert" && isset($_POST['login_id'])) {
 			$value = (isset($_GET["vote"]) ? $_GET["vote"] : "");
-			// Comprobar que existe login a votar
-			if($value==0) {
-				// Voto negativo
-			} elseif($value==1) {
-				// Voto positivo
-			}
+			
+			$login_id = $_POST['login_id'];
+			
+			if($login->exist($login_id)) // Check login exists
+				if($value==0 || $value==1) // Vote
+					$vote->insert($login_id, $value);
 		}
 		break;
 	case 'domain':

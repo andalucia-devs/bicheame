@@ -56,6 +56,21 @@ class Login{
 	}
 
 	/**
+	* Check if a login exists in the database
+	* @param int The ID of the specific row in the table
+	* @return boolean
+	*/
+	public function exist($id){
+		$id = $this->db->sanitize_var($id);
+		$ex = false;
+
+		if(sizeof($this->fetchById($id)) > 0)
+			$ex = true;
+		
+		return $ex;
+	}
+
+	/**
 	 * Insert new value on table login
 	 * @param int $domain ID of the domain at domain table
 	 * @param string $user Username
