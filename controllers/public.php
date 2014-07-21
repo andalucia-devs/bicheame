@@ -23,7 +23,7 @@ switch ($request) {
 		if($action=="insert") {
 			// Insert new login
 			if(isset($_POST['domain_name']) && isset($_POST['login_username']) && isset($_POST['login_password'])){
-				$domain_name = $_POST['domain_name']);
+				$domain_name = $_POST['domain_name'];
 				$login_username = $_POST['login_username'];
 				$login_password = $_POST['login_password'];
 				$login_comment = (isset($_POST["login_comment"]) ? $_POST["login_comment"] : "");
@@ -42,10 +42,13 @@ switch ($request) {
 
 		} elseif ($action=="view") {
 
-			// Mostrar todos los logins de un dominio
-			if(isset($_POST['domain_name']) {
-				//Comprobar si el dominio existe ya en la tabla domain
-				//Redireccionar a la vista
+			// Show all logins of a domain 
+			if(isset($_POST['domain_name']) && count($domain->fetchByName($_POST['domain_name'])) == 1) {
+
+				// If the domain exists then we request logins
+				$dom = $domain->fetchByName($_POST['domain_name']);
+				$logins = $login->fetchByDomainId($dom["domain_id"]);
+				// Redirect to our main view
 			}
 		}
 		break;
@@ -60,12 +63,9 @@ switch ($request) {
 					$vote->insert($login_id, $value);
 		}
 		break;
-	case 'domain':
-		# code...
-		break;
-	
+
 	default:
-		# code...
+		# :)
 		break;
 }
 
