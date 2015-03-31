@@ -28,7 +28,6 @@ class Login extends Illuminate\DataBase\Eloquent\Model{
 	* @return array
 	*/
 	protected function fetchById($id){
-	//$id = $this->db->sanitize_var($id);
 		return $this->where('login_id', $id)->get();
 	}
 
