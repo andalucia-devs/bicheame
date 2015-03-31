@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Accounts of {{ name }}{% endblock %}
+
+{% block subtitle %}
+	Accounts of {{ name }}
+{% endblock %}
+
+{% block content %}
+
+<div class="col-md-12">
+{# We have {{ logins|length }} rows. #}
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Username</th>
+        <th>Password</th>
+        <th>Info</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% set counter = 0 %}
+    {% for login in logins %}
+    {% set counter = counter + 1 %}
+    <tr>
+    	<td>{{ counter }}</td>
+    	<td>{{ login.login_username }}</td>
+    	<td>{{ login.login_password }}</td>
+    	<td>{{ login.login_comment }}</td>
+        <td>{{ login.login_date }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

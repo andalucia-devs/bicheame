@@ -1,0 +1,4 @@
+test/
+# Composer
+composer.lock
+vendor/*
